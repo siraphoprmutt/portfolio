@@ -81,6 +81,7 @@ const transformProjectData = async (project) => {
       text: pages ? "Pages" : "Repo",
       color: pages ? "primary" : "secondary",
     },
+    hide: meta?.hide || false,
   };
 };
 
@@ -146,10 +147,20 @@ const renderProjectFilter = (activeType, counts) => {
 const filterProjects = async (type, element) => {
   let projects = await fetchProjects();
 
+  // กรองเฉพาะโปรเจกต์ที่ไม่มี meta.hide = true
+  const transformedProjects = await Promise.all(
+    projects.map(transformProjectData)
+  );
+  projects = transformedProjects.filter((project) => !project.hide);
+
   if (type === "repo") {
-    projects = projects.filter((project) => !project.topics.includes("pages"));
+    projects = projects.filter(
+      (project) => !project.badge.text.includes("Pages")
+    );
   } else if (type === "pages") {
-    projects = projects.filter((project) => project.topics.includes("pages"));
+    projects = projects.filter((project) =>
+      project.badge.text.includes("Pages")
+    );
   }
 
   // อัปเดต active tab
@@ -191,11 +202,11 @@ const displayProjects = async (projects = [], activeType = "all") => {
     return;
   }
 
-  // รอให้ทุกการแปลงข้อมูลโปรเจกต์เสร็จสิ้นก่อนแสดงผล
+  // ตรวจสอบและกรองโปรเจกต์ที่ต้องแสดง (ไม่รวมที่มี hide: true)
   const projectCards = await Promise.all(
-    projects.map(async (project) => {
-      return await createProjectCard(project);
-    })
+    projects
+      .filter((project) => !project.hide) // กรองข้อมูลที่ซ่อน
+      .map(async (project) => await createProjectCard(project))
   );
 
   const projectFilter = renderProjectFilter(activeType, projectCounts);
