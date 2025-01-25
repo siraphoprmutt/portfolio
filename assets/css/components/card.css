@@ -42,3 +42,21 @@
     right: 10px;
     z-index: 9999;
 }
+
+.fixed-image-container {
+    width: 100%;
+    height: 150px;
+    /* ปรับขนาดความสูงตามต้องการ */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed-size-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* ตัดและปรับขนาดให้พอดีกับ container */
+    border-radius: 8px;
+}
