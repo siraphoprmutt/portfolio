@@ -37,13 +37,12 @@ const syncProjects = async () => {
 
 // ฟังก์ชันสำหรับแปลงข้อมูลโปรเจกต์เป็นข้อมูลที่ใช้ใน UI
 const transformProjectData = (project) => {
+  console.log("project", project);
   const repoOwner = config.repoOwner;
-  const repoDescription = project.description || "No description available";
-  const metadata = parseDescription(repoDescription);
   const pages = project.topics.includes("pages");
   return {
-    imageUrl: metadata.image || "./assets/images/placeholder/300x200.png",
-    name: metadata.name || project.name.toUpperCase(),
+    imageUrl: "./assets/images/placeholder/300x200.png",
+    name: project.name.toUpperCase(),
     author: capitalizeFirstLetter(project.owner.login),
     stars: project.stargazers_count || 0,
     updatedAt: new Date(project.updated_at).toLocaleDateString(),
@@ -51,7 +50,7 @@ const transformProjectData = (project) => {
       ? `https://${repoOwner}.github.io/${project.name}/`
       : `https://github.com/${repoOwner}/${project.name}`,
     page: project.has_pages,
-    description: metadata.description || "",
+    description: "",
     badge: {
       text: pages ? "Pages" : "Repo",
       color: pages ? "primary" : "secondary",
