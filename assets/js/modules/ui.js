@@ -23,3 +23,49 @@ const updateUIHeaderAndFooter = () => {
 };
 
 updateUIHeaderAndFooter();
+
+const renderProjectCard = (item) => {
+  return `
+    <div class="col-6 col-md-4 col-lg-3 mb-4">
+      <div class="project-card bg-white rounded-4 shadow-sm h-100 position-relative">
+        <span class="badge bg-${item.badge.color}">${item.badge.text}</span>
+        <div class="overflow-hidden fixed-image-container">
+          <img src="${
+            item.imageUrl
+          }" class="fixed-size-img card-img-top" alt="${item.name}" />
+        </div>
+        <div class="card-body p-2">
+          <h5 class="card-title text-primary fw-bold">${item.name}</h5>
+          <p class="card-text text-muted">${item.description}</p>
+          <a href="${item.repoUrl}" target="${
+    item.page ? "_self" : "_blank"
+  }" class="btn btn-outline-primary w-100">
+            View Project
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
+const renderProjectFilter = (activeType) => {
+  return `
+    <div class="text-center mb-4 col-12">
+      <button class="btn ${
+        activeType === "all" ? "btn-primary active" : "btn-outline-primary"
+      }" onclick="filterProjects('all', this)">
+        <i class="fas fa-globe"></i> All
+      </button>
+      <button class="btn ${
+        activeType === "repo" ? "btn-secondary active" : "btn-outline-secondary"
+      }" onclick="filterProjects('repo', this)">
+        <i class="fas fa-code"></i> Repo
+      </button>
+      <button class="btn ${
+        activeType === "pages" ? "btn-success active" : "btn-outline-success"
+      }" onclick="filterProjects('pages', this)">
+        <i class="fas fa-globe"></i> Pages
+      </button>
+    </div>
+  `;
+};
