@@ -34,12 +34,13 @@ const renderProjectCard = (item) => {
             item.imageUrl
           }" class="fixed-size-img card-img-top" alt="${item.name}" />
         </div>
-        <div class="card-body p-2">
-          <h5 class="card-title text-primary fw-bold">${item.name}</h5>
-          <p class="card-text text-muted">${item.description}</p>
-          <a href="${item.repoUrl}" target="${
-    item.page ? "_self" : "_blank"
-  }" class="btn btn-outline-primary w-100">
+        <div class="card-body p-2 d-flex flex-column">
+          <div>
+            <h5 class="card-title text-primary fw-bold">${item.name}</h5>
+            <p class="card-text text-muted">${item.description}</p>
+          </div>
+          <a href="${item.repoUrl}" target="${item.page ? "_self" : "_blank"}"
+             class="btn btn-outline-primary w-100 mt-auto">
             View Project
           </a>
         </div>

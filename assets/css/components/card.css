@@ -1,7 +1,11 @@
 .project-card {
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 100%;
+    /* ให้การ์ดมีความสูงเท่ากันทั้งหมด */
 }
 
 .project-card img {
@@ -19,11 +23,18 @@
 
 .project-card .card-body {
     text-align: center;
+    flex: 1;
+    /* ให้ส่วนของเนื้อหายืดเต็มที่และดันปุ่มลงล่าง */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .project-card .btn {
     border-radius: 12.5px;
     font-weight: bold;
+    margin-top: auto;
+    /* ดันปุ่มลงล่าง */
 }
 
 .project-card .card-title {
@@ -46,7 +57,6 @@
 .fixed-image-container {
     width: 100%;
     height: 150px;
-    /* ปรับขนาดความสูงตามต้องการ */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -57,6 +67,5 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* ตัดและปรับขนาดให้พอดีกับ container */
     border-radius: 8px;
 }
