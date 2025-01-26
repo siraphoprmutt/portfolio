@@ -1,7 +1,7 @@
 const headerHTML = `
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="/portfolio">
       <img src="./assets/images/logo.png" alt="Profile Picture" class="img-fluid rounded-circle me-2" width="30" height="30">
         Siraphop's Portfolio
       </a>
