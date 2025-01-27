@@ -10,7 +10,9 @@ const transformProjectData = async (project) => {
 
     meta = await fetchMetaRepo(metaUrl);
     if (meta) {
-      meta.imageUrl = `https://${repoOwner}.github.io/${project.name}/${meta.banner}`;
+      meta.imageUrl = project.topics.includes("main")
+        ? `https://${repoOwner}.github.io/${meta.banner}`
+        : `https://${repoOwner}.github.io/${project.name}/${meta.banner}`;
     }
   }
 
