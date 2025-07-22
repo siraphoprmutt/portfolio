@@ -17,8 +17,11 @@ const transformProjectData = async (project) => {
   }
 
   const pageUrl = project.has_pages
-    ? `https://${repoOwner}.github.io/${project.name}/`
+    ? (project.homepage && project.homepage.startsWith('http')
+      ? project.homepage
+      : `https://${repoOwner}.github.io/${project.name}/`)
     : null;
+
   const repoUrl = `https://github.com/${repoOwner}/${project.name}`;
 
   return {
@@ -37,7 +40,6 @@ const transformProjectData = async (project) => {
     hide: meta?.hide || false,
   };
 };
-
 
 const filterProjectsByType = (projects, type) => {
   return projects.filter((project) => {
