@@ -25,7 +25,6 @@ const updateUIHeaderAndFooter = () => {
 updateUIHeaderAndFooter();
 
 const renderProjectCard = (item) => {
-  console.log("item: ", item);
   return `
     <div class="col-6 col-md-4 col-lg-3 mb-4">
       <div class="project-card bg-white rounded-4 shadow-sm h-100 position-relative">
