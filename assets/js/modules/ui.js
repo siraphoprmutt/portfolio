@@ -30,19 +30,27 @@ const renderProjectCard = (item) => {
       <div class="project-card bg-white rounded-4 shadow-sm h-100 position-relative">
         <span class="badge bg-${item.badge.color}">${item.badge.text}</span>
         <div class="overflow-hidden fixed-image-container">
-          <img src="${
-            item.imageUrl
-          }" class="fixed-size-img card-img-top" alt="${item.name}" />
+          <img src="${item.imageUrl
+    }" class="fixed-size-img card-img-top" alt="${item.name}" />
         </div>
         <div class="card-body p-2 d-flex flex-column">
           <div>
             <h5 class="card-title text-primary fw-bold">${item.name}</h5>
             <p class="card-text text-muted">${item.description}</p>
           </div>
-          <a href="${item.repoUrl}" target="${item.page ? "_self" : "_blank"}"
-             class="btn btn-outline-primary w-100 mt-auto">
-            View Project
-          </a>
+          ${item.page ? `
+            <a href="${item.page}" target="_self"
+              class="btn btn-outline-primary w-100 mt-auto">
+              View Project
+            </a>` : ''
+          }
+
+          ${item.repoUrl ? `
+            <a href="${item.repoUrl}" target="${item.repoUrl.includes('github') ? '_self' : '_blank'}"
+              class="btn btn-outline-secondary w-100 mt-2">
+              View Repo
+            </a>` : ''
+          }
         </div>
       </div>
     </div>
@@ -52,19 +60,16 @@ const renderProjectCard = (item) => {
 const renderProjectFilter = (activeType) => {
   return `
     <div class="text-center mb-4 col-12">
-      <button class="btn ${
-        activeType === "all" ? "btn-primary active" : "btn-outline-primary"
-      }" onclick="filterProjects('all', this)">
+      <button class="btn ${activeType === "all" ? "btn-primary active" : "btn-outline-primary"
+    }" onclick="filterProjects('all', this)">
         <i class="fas fa-globe"></i> All
       </button>
-      <button class="btn ${
-        activeType === "repo" ? "btn-secondary active" : "btn-outline-secondary"
-      }" onclick="filterProjects('repo', this)">
+      <button class="btn ${activeType === "repo" ? "btn-secondary active" : "btn-outline-secondary"
+    }" onclick="filterProjects('repo', this)">
         <i class="fas fa-code"></i> Repo
       </button>
-      <button class="btn ${
-        activeType === "pages" ? "btn-success active" : "btn-outline-success"
-      }" onclick="filterProjects('pages', this)">
+      <button class="btn ${activeType === "pages" ? "btn-success active" : "btn-outline-success"
+    }" onclick="filterProjects('pages', this)">
         <i class="fas fa-globe"></i> Pages
       </button>
     </div>
