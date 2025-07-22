@@ -25,24 +25,39 @@ const updateUIHeaderAndFooter = () => {
 updateUIHeaderAndFooter();
 
 const renderProjectCard = (item) => {
-  console.log("item: ", item)
   return `
     <div class="col-6 col-md-4 col-lg-3 mb-4">
       <div class="project-card bg-white rounded-4 shadow-sm h-100 position-relative">
         <span class="badge bg-${item.badge.color}">${item.badge.text}</span>
         <div class="overflow-hidden fixed-image-container">
-          <img src="${item.imageUrl
-    }" class="fixed-size-img card-img-top" alt="${item.name}" />
+          <img src="${item.imageUrl}" class="fixed-size-img card-img-top" alt="${item.name}" />
         </div>
         <div class="card-body p-2 d-flex flex-column">
           <div>
             <h5 class="card-title text-primary fw-bold">${item.name}</h5>
             <p class="card-text text-muted">${item.description}</p>
           </div>
-          <a href="${item.repoUrl}" target="${item.page ? "_self" : "_blank"}"
-             class="btn btn-outline-primary w-100 mt-auto">
-             ${item.page ? "View Project" : "View Repo"}
-          </a>
+
+          ${item.page
+      ? `
+                <div class="d-flex gap-2 mt-auto">
+                  <a href="${item.page}" target="_self"
+                    class="btn btn-outline-primary flex-fill">
+                    View Project
+                  </a>
+                  <a href="${item.repoUrl}" target="_blank"
+                    class="btn btn-outline-secondary flex-fill">
+                    View Repo
+                  </a>
+                </div>
+              `
+      : `
+                <a href="${item.repoUrl}" target="_blank"
+                  class="btn btn-outline-primary w-100 mt-auto">
+                  View Repo
+                </a>
+              `
+    }
         </div>
       </div>
     </div>
