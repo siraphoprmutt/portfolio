@@ -40,7 +40,7 @@ const transformProjectData = async (project) => {
 
 const filterProjectsByType = (projects, type) => {
   return projects.filter((project) => {
-    if (project.hide) return false;
+    if (project.meta?.hide || project.hide) return false;
     if (type === "repo") return project.badge.text === "Repo";
     if (type === "pages") return project.badge.text === "Pages";
     return true;
