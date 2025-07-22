@@ -1,5 +1,4 @@
 const transformProjectData = async (project) => {
-  console.log("project: ", project);
   const repoOwner = config.repoOwner;
   const metaTag = project.topics.includes("meta");
   let meta = null;
