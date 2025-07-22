@@ -16,16 +16,19 @@ const transformProjectData = async (project) => {
     }
   }
 
+  const pageUrl = project.has_pages
+    ? `https://${repoOwner}.github.io/${project.name}/`
+    : null;
+  const repoUrl = `https://github.com/${repoOwner}/${project.name}`;
+
   return {
     imageUrl: meta?.imageUrl || "./assets/images/placeholder/300x200.png",
     name: meta?.name || project.name.toUpperCase(),
     author: project.owner?.login || "Unknown",
     stars: project.stargazers_count || 0,
     updatedAt: new Date(project.updated_at).toLocaleDateString(),
-    repoUrl: project.has_pages
-      ? `https://${repoOwner}.github.io/${project.name}/`
-      : `https://github.com/${repoOwner}/${project.name}`,
-    page: project.has_pages,
+    repoUrl,
+    pageUrl,
     description: meta?.description || "No description available",
     badge: {
       text: project.topics.includes("pages") ? "Pages" : "Repo",
@@ -34,6 +37,7 @@ const transformProjectData = async (project) => {
     hide: meta?.hide || false,
   };
 };
+
 
 const filterProjectsByType = (projects, type) => {
   return projects.filter((project) => {
