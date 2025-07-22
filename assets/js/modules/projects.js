@@ -1,26 +1,24 @@
 const transformProjectData = async (project) => {
+  console.log("project: ", project);
   const repoOwner = config.repoOwner;
   const metaTag = project.topics.includes("meta");
   let meta = null;
 
   if (metaTag) {
-    const metaUrl = project.topics.includes("main")
-      ? `https://${repoOwner}.github.io/meta.json`
-      : `https://${repoOwner}.github.io/${project.name}/meta.json`;
-
+    // ดึง meta.json จาก raw.githubusercontent.com
+    const metaUrl = `https://raw.githubusercontent.com/${repoOwner}/${project.name}/refs/heads/main/meta.json`;
     meta = await fetchMetaRepo(metaUrl);
+
     if (meta) {
-      meta.imageUrl = project.topics.includes("main")
-        ? `https://${repoOwner}.github.io/${meta.banner}`
-        : `https://${repoOwner}.github.io/${project.name}/${meta.banner}`;
+      meta.imageUrl = `https://raw.githubusercontent.com/${repoOwner}/${project.name}/refs/heads/main/${meta.banner}`;
     }
   }
 
   const pageUrl = project.has_pages
-    ? (project.homepage && project.homepage.startsWith('http')
-      ? project.homepage
-      : `https://${repoOwner}.github.io/${project.name}/`)
-    : null;
+    ? `https://${repoOwner}.github.io/${project.name}/`
+    : (project.homepage && project.homepage.startsWith('http')
+        ? project.homepage
+        : null);
 
   const repoUrl = `https://github.com/${repoOwner}/${project.name}`;
 
