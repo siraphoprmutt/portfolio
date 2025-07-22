@@ -25,28 +25,30 @@ const updateUIHeaderAndFooter = () => {
 updateUIHeaderAndFooter();
 
 const renderProjectCard = (item) => {
+  const getTarget = (url) => url.includes('github') ? '_self' : '_blank';
+
   return `
     <div class="col-6 col-md-4 col-lg-3 mb-4">
       <div class="project-card bg-white rounded-4 shadow-sm h-100 position-relative">
         <span class="badge bg-${item.badge.color}">${item.badge.text}</span>
         <div class="overflow-hidden fixed-image-container">
-          <img src="${item.imageUrl
-    }" class="fixed-size-img card-img-top" alt="${item.name}" />
+          <img src="${item.imageUrl}" class="fixed-size-img card-img-top" alt="${item.name}" />
         </div>
         <div class="card-body p-2 d-flex flex-column">
           <div>
             <h5 class="card-title text-primary fw-bold">${item.name}</h5>
             <p class="card-text text-muted">${item.description}</p>
           </div>
+          
           ${item.page ? `
-            <a href="${item.page}" target="_self"
+            <a href="${item.page}" target="${getTarget(item.page)}"
               class="btn btn-outline-primary w-100 mt-auto">
               View Project
             </a>` : ''
           }
 
           ${item.repoUrl ? `
-            <a href="${item.repoUrl}" target="${item.repoUrl.includes('github') ? '_self' : '_blank'}"
+            <a href="${item.repoUrl}" target="${getTarget(item.repoUrl)}"
               class="btn btn-outline-secondary w-100 mt-2">
               View Repo
             </a>` : ''
